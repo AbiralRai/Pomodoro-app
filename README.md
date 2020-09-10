@@ -1,6 +1,6 @@
-# pomodoro-app
+# Pomodoro-App
 
-> ## **This is a clone app from [https://pomofocus.io/]**
+> ## **This is a clone app from [Pomofocus](https://pomofocus.io/)**
 
 <br/>
 
