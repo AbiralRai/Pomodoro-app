@@ -1,0 +1,23 @@
+{
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/export": 0,
+    "prettier/prettier": ["error"],
+    "import/prefer-default-export": "off",
+    "react/prop-types": 0,
+    "react/jsx-props-no-spreading": "off"
+  },
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["react", "prettier"]
+}
