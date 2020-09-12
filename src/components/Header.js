@@ -9,7 +9,7 @@ const SettingBtn = styled(Button)`
   background-color: rgba(255, 255, 255, 0.2);
 `;
 export default function HeaderComponent() {
-  const [isModalActive, setModal] = useState(true);
+  const [isModalActive, setModal] = useState(false);
   return (
     <>
       <Header>

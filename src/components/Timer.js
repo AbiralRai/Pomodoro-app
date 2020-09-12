@@ -1,93 +1,48 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React, { useState } from 'react';
 
-const TimerContainer = styled.div`
-  max-width: 520px;
-  width: 100%;
-  text-align: center;
-  height: 100%;
-  margin: 0 auto;
-  padding: 20px 0px 30px;
-  background-color: rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
-`;
+import { useTimerContext } from '../contexts';
+import PomodoroTimer from './PomodoroTimer';
+import ShortBreakTimer from './ShortBreakTimer';
+import LongBreakTimer from './LongBreakTimer';
+import TimerButton from './TimerButton';
 
-const ButtonStack = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const TimerButton = styled.button`
-  display: inline-block;
-  padding: 4px 14px;
-  margin: none;
-  color: white;
-  background: ${(props) => (props.isActive ? 'rgba(0, 0, 0, 0.15)' : 'transparent')};
-  border: none;
-  border-radius: 4px;
-  height: 28px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  /* opacity: 1; */
-  box-shadow: none;
+import { TimerContainer, ButtonStack } from '../elements';
 
-  &:active {
-    transform: translateY(2px);
-    box-shadow: none;
-  }
-  &:focus {
-    outline: none;
-  }
-`;
-
-const Time = styled.div`
-  font-size: 120px;
-  font-weight: bold;
-  margin-top: 20px;
-`;
-
-const StartStopButton = styled.button`
-  cursor: pointer;
-  border: none;
-  padding: 0px 12px;
-  border-radius: 4px;
-  box-shadow: rgb(235, 235, 235) 0px 6px 0px;
-  font-size: 2rem;
-  height: 55px;
-  color: rgb(240, 91, 86);
-  font-weight: bold;
-  width: 200px;
-  background-color: white;
-  transition: color 0.5s ease-in-out 0s;
-
-  &:active {
-    transform: translateY(6px);
-    box-shadow: none;
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  ${(props) =>
-    props.isRunning &&
-    css`
-      transform: translateY(6px);
-      box-shadow: none;
-    `}
-`;
+const buttonTitles = ['Pomodoro', 'Short Break', 'Long Break'];
 
 export default function TimerComponent() {
+  const [selectedTimer, setSelectedTimer] = useState('Pomodoro');
+  const { setSelectedTimerBg } = useTimerContext();
+
+  function handleButton(title) {
+    if (title === 'Pomodoro') {
+      setSelectedTimer(title);
+      setSelectedTimerBg(title);
+    } else if (title === 'Short Break') {
+      setSelectedTimer(title);
+      setSelectedTimerBg(title);
+    } else if (title === 'Long Break') {
+      setSelectedTimer(title);
+      setSelectedTimerBg(title);
+    }
+  }
+
   return (
     <TimerContainer>
       <ButtonStack>
-        <TimerButton isActive>Pomodoro</TimerButton>
-        <TimerButton>Short Break</TimerButton>
-        <TimerButton>Long Break</TimerButton>
+        {buttonTitles.map((title, index) => (
+          <TimerButton
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
+            title={title}
+            isActive={title === selectedTimer}
+            handleButton={handleButton}
+          />
+        ))}
       </ButtonStack>
-      <Time>25:00</Time>
-      <StartStopButton>Start</StartStopButton>
+      {selectedTimer === 'Pomodoro' && <PomodoroTimer />}
+      {selectedTimer === 'Short Break' && <ShortBreakTimer />}
+      {selectedTimer === 'Long Break' && <LongBreakTimer />}
     </TimerContainer>
   );
 }

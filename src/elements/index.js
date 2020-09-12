@@ -5,3 +5,4 @@ export * from './Logo';
 export * from './Header';
 export * from './Modal';
 export * from './Close';
+export * from './Timer';

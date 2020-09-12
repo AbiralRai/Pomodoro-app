@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import Header from './Header';
 import Timer from './Timer';
 import Progress from './Progress';
+import { useTimerContext } from '../contexts';
 
 import { Wrapper, Container } from '../elements';
 
@@ -15,8 +16,14 @@ const Main = styled.main`
 `;
 
 export default function Pomodoro() {
+  const { selectedTimerBg } = useTimerContext();
+  let bg = selectedTimerBg;
+  useEffect(() => {
+    bg = selectedTimerBg;
+  }, [selectedTimerBg]);
+
   return (
-    <Wrapper primary>
+    <Wrapper bg={bg}>
       <Container>
         <Header />
         <Main>
