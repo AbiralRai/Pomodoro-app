@@ -28,7 +28,6 @@ export const TimerButton = styled.button`
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
-  /* opacity: 1; */
   box-shadow: none;
 
   &:active {

@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { elevation } from '../utils';
 
 export const Button = styled.button`
   border: none;
@@ -9,13 +8,10 @@ export const Button = styled.button`
   color: white;
   background-color: transparent;
   outline: none;
-  transition: 0.3s ease box-shadow;
-  ${elevation[1]};
-  &:hover {
-    ${elevation[2]};
-  }
+  cursor: pointer;
   &:active {
-    ${elevation[1]};
+    transform: translateY(2px);
+    box-shadow: none;
   }
   ${({ size }) => {
     if (size === 'sm') {
