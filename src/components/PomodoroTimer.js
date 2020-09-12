@@ -22,7 +22,6 @@ export default function PomodoroTimer() {
       }, 1500);
     },
   });
-
   useEffect(() => {
     setTime(pomodoro * 60);
     pause();
