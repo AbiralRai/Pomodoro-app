@@ -10,9 +10,10 @@ import alarm from '../utils/alarm.mp3';
 
 export default function PomodoroTimer() {
   const [play, { stop }] = useSound(alarm);
-  const { pomodoro } = useTimerContext();
+  const { pomodoro, setProgress } = useTimerContext();
+  const initialTime = pomodoro * 60;
   const { time, setTime, start, pause, isRunning, reset } = useTimer({
-    initialTime: pomodoro * 60,
+    initialTime,
     onTimeOver: () => {
       reset();
       play();
@@ -26,6 +27,10 @@ export default function PomodoroTimer() {
     setTime(pomodoro * 60);
     pause();
   }, [pomodoro]);
+
+  useEffect(() => {
+    setProgress(((100 / initialTime) * (initialTime - time)).toFixed(4));
+  }, [time]);
 
   const minutes = PadTime(Math.floor(time / 60));
   const seconds = PadTime(time - minutes * 60);

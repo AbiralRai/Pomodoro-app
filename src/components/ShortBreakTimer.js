@@ -10,9 +10,10 @@ import alarm from '../utils/alarm.mp3';
 
 export default function ShortBreakTimer() {
   const [play, { stop }] = useSound(alarm);
-  const { shortB } = useTimerContext();
+  const { shortB, setProgress } = useTimerContext();
+  const initialTime = shortB * 60;
   const { time, setTime, start, pause, isRunning, reset } = useTimer({
-    initialTime: shortB * 60,
+    initialTime,
     onTimeOver: () => {
       reset();
       play();
@@ -26,6 +27,10 @@ export default function ShortBreakTimer() {
     setTime(shortB * 60);
     pause();
   }, [shortB]);
+
+  useEffect(() => {
+    setProgress(((100 / initialTime) * (initialTime - time)).toFixed(4));
+  }, [time]);
 
   const minutes = PadTime(Math.floor(time / 60));
   const seconds = PadTime(time - minutes * 60);

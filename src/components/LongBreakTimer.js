@@ -10,9 +10,10 @@ import alarm from '../utils/alarm.mp3';
 
 export default function LongBreakTimer() {
   const [play, { stop }] = useSound(alarm);
-  const { longB } = useTimerContext();
+  const { longB, setProgress } = useTimerContext();
+  const initialTime = longB * 60;
   const { time, setTime, start, pause, isRunning, reset } = useTimer({
-    initialTime: longB * 60,
+    initialTime,
     onTimeOver: () => {
       reset();
       play();
@@ -22,6 +23,11 @@ export default function LongBreakTimer() {
       }, 1500);
     },
   });
+
+  useEffect(() => {
+    setProgress(((100 / initialTime) * (initialTime - time)).toFixed(4));
+  }, [time]);
+
   useEffect(() => {
     setTime(longB * 60);
     pause();

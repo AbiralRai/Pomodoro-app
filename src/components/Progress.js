@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+
+import { useTimerContext } from '../contexts';
 
 const ProgressBar = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
@@ -17,9 +19,14 @@ const Progress = styled.div`
 `;
 
 export default function ProgressComponent() {
+  const { progress } = useTimerContext();
+  let progressTime = progress;
+  useEffect(() => {
+    progressTime = progress;
+  }, [progress]);
   return (
     <ProgressBar>
-      <Progress remaining={0} />
+      <Progress remaining={progressTime} />
     </ProgressBar>
   );
 }

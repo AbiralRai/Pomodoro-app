@@ -9,6 +9,8 @@ export const TimerProvider = ({ children }) => {
   const [shortB, setShortB] = useState(5);
   const [longB, setLongB] = useState(15);
   const [selectedTimerBg, setSelectedTimerBg] = useState('Pomodoro');
+  const [progress, setProgress] = useState(0);
+  // (100/setSec) * (setSec - currentSec = secPass ) => 100/60 * (60-57=3) = 5% width
 
   return (
     <TimerContext.Provider
@@ -21,6 +23,8 @@ export const TimerProvider = ({ children }) => {
         setLongB,
         selectedTimerBg,
         setSelectedTimerBg,
+        progress,
+        setProgress,
       }}
     >
       {children}
