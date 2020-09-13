@@ -3,7 +3,7 @@ import useSound from 'use-sound';
 
 import { useTimerContext } from '../contexts';
 import { useTimer } from '../hooks';
-import { PadTime } from '../utils';
+import { PadTime, ProgressWidth } from '../utils';
 
 import { Time, StartStopButton } from '../elements';
 import alarm from '../utils/alarm.mp3';
@@ -29,7 +29,7 @@ export default function ShortBreakTimer() {
   }, [shortB]);
 
   useEffect(() => {
-    setProgress(((100 / initialTime) * (initialTime - time)).toFixed(4));
+    setProgress(ProgressWidth(initialTime, time));
   }, [time]);
 
   const minutes = PadTime(Math.floor(time / 60));
