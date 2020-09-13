@@ -7,9 +7,11 @@ import { PadTime, ProgressWidth } from '../utils';
 
 import { Time, StartStopButton } from '../elements';
 import alarm from '../utils/alarm.mp3';
+import click from '../utils/click.wav';
 
 export default function LongBreakTimer() {
   const [play, { stop }] = useSound(alarm);
+  const [playClick] = useSound(click);
   const { longB, setProgress } = useTimerContext();
   const initialTime = longB * 60;
   const { time, setTime, start, pause, isRunning, reset } = useTimer({
@@ -49,11 +51,24 @@ export default function LongBreakTimer() {
         <span>{seconds}</span>
       </Time>
       {isRunning ? (
-        <StartStopButton className="startStopBtn" onClick={pause} active>
+        <StartStopButton
+          className="startStopBtn"
+          onClick={() => {
+            pause();
+            playClick();
+          }}
+          active
+        >
           Stop
         </StartStopButton>
       ) : (
-        <StartStopButton className="startStopBtn" onClick={start}>
+        <StartStopButton
+          className="startStopBtn"
+          onClick={() => {
+            start();
+            playClick();
+          }}
+        >
           Start
         </StartStopButton>
       )}

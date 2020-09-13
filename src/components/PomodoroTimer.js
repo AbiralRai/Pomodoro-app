@@ -7,9 +7,11 @@ import { PadTime, ProgressWidth } from '../utils';
 
 import { Time, StartStopButton } from '../elements';
 import alarm from '../utils/alarm.mp3';
+import click from '../utils/click.wav';
 
 export default function PomodoroTimer() {
   const [play, { stop }] = useSound(alarm);
+  const [playClick] = useSound(click);
   const { pomodoro, setProgress } = useTimerContext();
   const initialTime = pomodoro * 60;
   const { time, setTime, start, pause, isRunning, reset } = useTimer({
@@ -48,11 +50,24 @@ export default function PomodoroTimer() {
         <span>{seconds}</span>
       </Time>
       {isRunning ? (
-        <StartStopButton onClick={pause} active>
+        <StartStopButton
+          onClick={() => {
+            pause();
+            playClick();
+          }}
+          active
+        >
           Stop
         </StartStopButton>
       ) : (
-        <StartStopButton onClick={start}>Start</StartStopButton>
+        <StartStopButton
+          onClick={() => {
+            start();
+            playClick();
+          }}
+        >
+          Start
+        </StartStopButton>
       )}
     </>
   );
