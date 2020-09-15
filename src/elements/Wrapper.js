@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   background: #edf2f7;
   transition: 0.5s all ease-out;
   color: #fff;
+  padding: 0 10px;
 
   ${(props) =>
     props.bg === 'Pomodoro' &&

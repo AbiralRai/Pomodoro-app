@@ -6,8 +6,8 @@ import { useTimer } from '../hooks';
 import { PadTime, ProgressWidth } from '../utils';
 
 import { Time, StartStopButton } from '../elements';
-import alarm from '../utils/alarm.mp3';
-import click from '../utils/click.wav';
+import alarm from '../utils/kichen-timer.mp3';
+import click from '../utils/button-press.wav';
 
 export default function ShortBreakTimer() {
   const [play, { stop }] = useSound(alarm);

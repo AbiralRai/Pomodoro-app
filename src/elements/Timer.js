@@ -15,6 +15,7 @@ export const ButtonStack = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 4px;
 `;
 export const TimerButton = styled.button`
   display: inline-block;
@@ -36,6 +37,10 @@ export const TimerButton = styled.button`
   }
   &:focus {
     outline: none;
+  }
+
+  @media (max-width: 400px) {
+    font-size: 1rem;
   }
 `;
 
